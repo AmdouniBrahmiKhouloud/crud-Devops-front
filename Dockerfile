@@ -1,4 +1,8 @@
 FROM node:alpine
 WORKDIR /app
-RUN npm install 
-RUN npm build --prod
+COPY / ./
+COPY package*.json ./
+RUN npm install -g @angular/cli@13.2.3 && \
+    npm install && \
+    ng build
+COPY . .
