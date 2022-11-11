@@ -1,8 +1,11 @@
 FROM node:alpine
 WORKDIR /app
-COPY / ./
-COPY package*.json ./
-RUN npm install -g @angular/cli@13.2.3 && \
-    npm install && \
-    ng build
+COPY package.json
+COPY package-lock.json
+RUN npm install
+
+# copy over all code files
 COPY . .
+
+# expose internal docker container port to external environment
+EXPOSE 4200
